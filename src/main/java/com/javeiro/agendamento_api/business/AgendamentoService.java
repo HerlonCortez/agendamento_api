@@ -4,6 +4,7 @@ import com.javeiro.agendamento_api.business.mapper.IAgendamentoMapper;
 import com.javeiro.agendamento_api.controller.dto.in.AgendamentoInDto;
 import com.javeiro.agendamento_api.controller.dto.out.AgendamentoOutDto;
 import com.javeiro.agendamento_api.infrastructure.entities.Agendamento;
+import com.javeiro.agendamento_api.infrastructure.exception.NotFoundException;
 import com.javeiro.agendamento_api.infrastructure.repositories.AgendamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class AgendamentoService {
 
     public AgendamentoOutDto gravarAgendamento(AgendamentoInDto agendamento) {
        return mapper.paraOutDto(repository.save(mapper.paraEntity(agendamento)));
+    }
+
+    public AgendamentoOutDto buscarAgendamentoPorId(Long id) {
+        return mapper.paraOutDto(repository.findById(id).orElseThrow(() -> new NotFoundException("Id não encontrado")));
     }
 }

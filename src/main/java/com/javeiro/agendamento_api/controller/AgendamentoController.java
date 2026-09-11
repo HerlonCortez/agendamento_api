@@ -5,10 +5,7 @@ import com.javeiro.agendamento_api.controller.dto.in.AgendamentoInDto;
 import com.javeiro.agendamento_api.controller.dto.out.AgendamentoOutDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/agendamento")
@@ -19,5 +16,10 @@ public class AgendamentoController {
     @PostMapping
     public ResponseEntity<AgendamentoOutDto> gravarAgendamento(@RequestBody AgendamentoInDto agendamento){
         return ResponseEntity.ok(agendamentoService.gravarAgendamento(agendamento));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AgendamentoOutDto> buscarAgendamentoPorId(@PathVariable Long id){
+        return ResponseEntity.ok(agendamentoService.buscarAgendamentoPorId(id));
     }
 }
