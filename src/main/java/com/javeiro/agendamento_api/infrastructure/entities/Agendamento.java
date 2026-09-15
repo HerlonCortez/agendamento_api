@@ -26,6 +26,7 @@ public class Agendamento {
     private LocalDateTime dataHoraAgendamento;
     private LocalDateTime dataHoraModificacao;
     private String mensagem;
+    @Enumerated(EnumType.STRING)
     private StatusNotificacaoEnum statusNotificacao;
 
     @PrePersist
